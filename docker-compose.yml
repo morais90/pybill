@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  olist:
+    build:
+      context: .
+      target: development
+    image: olist
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code/
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: olist
+      POSTGRES_PASSWORD: olist
+      POSTGRES_DB: olist
