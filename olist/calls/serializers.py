@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from rest_framework import serializers
-from .models import CallRecord
+from .models import CallRecord, Bill
 
 
 class CallRecordStartSerializer(serializers.ModelSerializer):
@@ -71,3 +71,13 @@ class CallRecordEndSerializer(serializers.ModelSerializer):
     class Meta:
         model = CallRecord
         fields = ('id', 'timestamp', 'call_id', 'type')
+
+
+class BillSerializer(serializers.ModelSerializer):
+    start_date = serializers.DateField(read_only=True)
+    start_time = serializers.TimeField(read_only=True)
+    duration = serializers.DurationField(read_only=True)
+
+    class Meta:
+        model = Bill
+        fields = ('id', 'start_date', 'start_time', 'duration', 'price')

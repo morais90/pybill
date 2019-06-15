@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.admin',
     'rest_framework',
+    'django_filters',
     'olist.calls'
 ]
 
