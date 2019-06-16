@@ -7,3 +7,6 @@ build:
     web:
       dockerfile: Dockerfile
       target: production
+
+run:
+  web: gunicorn olist.core.wsgi --bind=0.0.0.0:$PORT --workers=4
