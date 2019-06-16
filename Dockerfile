@@ -30,5 +30,5 @@ FROM builder as production
 
 RUN pip install --no-cache-dir --requirement requirements/production.txt
 
-EXPOSE 80
-CMD ["gunicorn", "olist.core.wsgi", "--bind=0.0.0.0:80", "--workers=4"]
+EXPOSE $PORT
+CMD ["gunicorn", "olist.core.wsgi", "--bind=0.0.0.0:${PORT}", "--workers=4"]
