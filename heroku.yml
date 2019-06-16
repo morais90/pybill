@@ -8,5 +8,10 @@ build:
       dockerfile: Dockerfile
       target: production
 
+release:
+  image: web
+  command:
+    - release.sh
+
 run:
   web: gunicorn olist.core.wsgi --bind=0.0.0.0:$PORT --workers=4
