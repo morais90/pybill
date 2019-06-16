@@ -58,7 +58,7 @@ class Bill(models.Model):
             for date in period.range('minutes'):
                 time = date.time()
 
-                if time >= min_reduced_hour or time <= max_reduced_hour:
+                if time >= min_reduced_hour or time < max_reduced_hour:
                     continue
 
                 if date == start_date:
