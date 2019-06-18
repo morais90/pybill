@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3-alpine
+      - image: circleci/python:3.7
         enviromnet:
           DATABASE_URL: postgresql://olist@localhost/olist
 
@@ -35,7 +35,10 @@ jobs:
 
   test:
     docker:
-      - image: circleci/python:3-alpine
+      - image: circleci/python:3.7
+        enviromnet:
+          DATABASE_URL: postgresql://olist@localhost/olist
+
       - image: circleci/postgres:alpine
         environment:
           POSTGRES_USER: olist
