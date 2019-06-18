@@ -49,7 +49,7 @@ jobs:
           name: Linter
           command: |
             . venv/bin/activate
-            pycodestyle
+            pycodestyle olist/
 
       - run:
           name: Unit tests
