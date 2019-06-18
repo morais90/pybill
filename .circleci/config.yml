@@ -58,6 +58,9 @@ jobs:
             python manage.py test --verbosity 2 --noinput  tests
 
   deploy:
+    docker:
+      - image: circleci/python:3.7
+
     steps:
       - checkout
       - run:
