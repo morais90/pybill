@@ -20,7 +20,7 @@ jobs:
 
       - run:
           name: Install requirements
-          command: pip install --upgrade pip && pip install --no-cache-dir --requirement requirements/development.txt
+          command: sudo pip install --upgrade pip && sudo pip install --no-cache-dir --requirement requirements/development.txt
 
   test:
     docker:
