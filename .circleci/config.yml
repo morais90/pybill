@@ -15,7 +15,7 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.7
-        enviromnet:
+        environment:
           DATABASE_URL: postgresql://olist@localhost/olist
 
       - image: circleci/postgres:alpine
