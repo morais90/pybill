@@ -13,25 +13,14 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
-      - restore_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 
       - run:
           name: Install dependencies
-          command: apk add --no-cache gcc musl-dev postgresql-dev zlib-dev jpeg-dev libxml2-dev libxslt-dev
+          command: apt-get update && apt-get install -y gcc postgresql-dev zlib-dev jpeg-dev libxml2-dev libxslt-dev
 
       - run:
           name: Install requirements
           command: pip install --upgrade pip && pip install --no-cache-dir --requirement requirements/development.txt
-
-      - save_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.7/site-packages"
 
   test:
     docker:
