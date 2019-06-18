@@ -57,7 +57,7 @@ jobs:
             . venv/bin/activate
             python manage.py test --verbosity 2 --noinput  tests
 
-deploy:
+  deploy:
     steps:
       - checkout
       - run:
