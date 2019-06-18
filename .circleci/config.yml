@@ -1,3 +1,15 @@
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+
 version: 2
 jobs:
   build:
@@ -18,36 +30,37 @@ jobs:
           name: Install dependencies
           command: sudo apt-get update && sudo apt-get install -y libpq-dev
 
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/development.txt" }}
+
       - run:
           name: Install requirements
-          command: sudo pip install --upgrade pip && sudo pip install --no-cache-dir --requirement requirements/development.txt
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            sudo pip install --upgrade pip && sudo pip install --no-cache-dir --requirement requirements/development.txt
 
-  test:
-    docker:
-      - image: circleci/python:3.7
-        enviromnet:
-          DATABASE_URL: postgresql://olist@localhost/olist
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/development.txt" }}
+          paths:
+            - "venv"
 
-      - image: circleci/postgres:alpine
-        environment:
-          POSTGRES_USER: olist
-          POSTGRES_DB: olist
-
-    steps:
-      - checkout
       - run:
           name: Linter
-          command: pycodestyle
+          command: |
+            . venv/bin/activate
+            pycodestyle
 
       - run:
           name: Unit tests
-          command: python manage.py test --verbosity 2 --noinput  tests
+          command: |
+            . venv/bin/activate
+            python manage.py test --verbosity 2 --noinput  tests
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+deploy:
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
