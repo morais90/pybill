@@ -38,7 +38,7 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            sudo pip install --upgrade pip && sudo pip install --no-cache-dir --requirement requirements/development.txt
+            sudo pip install --upgrade pip && sudo pip install --requirement requirements/development.txt
 
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements/development.txt" }}
