@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Install dependencies
-          command: sudo apt-get update && apt-get install -y gcc postgresql-dev zlib-dev jpeg-dev libxml2-dev libxslt-dev
+          command: sudo apt-get update && sudo apt-get install -y gcc postgresql-dev zlib-dev jpeg-dev libxml2-dev libxslt-dev
 
       - run:
           name: Install requirements
