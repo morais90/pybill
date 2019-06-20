@@ -55,7 +55,7 @@ jobs:
           name: Unit tests
           command: |
             . venv/bin/activate
-            python manage.py test --verbosity 2 --noinput  tests
+            python manage.py test --verbosity 2 --noinput --settings olist.core.settings_test tests
 
   deploy:
     docker:
