@@ -1,7 +1,16 @@
-# Olist Calls
+## Olist Calls
 
-[![CircleCI](https://circleci.com/gh/morais90/work-at-olist/tree/master.svg?style=svg)](https://circleci.com/gh/morais90/work-at-olist/tree/master) [![Heroku](https://heroku-badge.herokuapp.com/?app=work-at-olist-calls)]
+[![CircleCI](https://circleci.com/gh/morais90/work-at-olist/tree/master.svg?style=svg)](https://circleci.com/gh/morais90/work-at-olist/tree/master)
 
+Olist Calls is an application that helps in tracking the calls that your company makes. Through it, it's possible to monitor and audit in real time all the data necessary for good management. The relevant data reports allow you to take care of your business in a much simpler way.
+
+### API Documentation
+
+The API documentation access is allowed through the URL `/docs/` path. The documentation explain the available methods and the parameters for each context.
+
+### Browse the API
+
+It's able to browse the API endpoints with the browsable API. To access the browsable API you only need to use the endpoint at a browser environment.
 
 ### Continous Integration
 

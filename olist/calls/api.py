@@ -5,22 +5,44 @@ from rest_framework import mixins
 from rest_framework import exceptions
 
 from .models import CallRecord, Bill
-from .serializers import CallRecordStartSerializer, CallRecordEndSerializer, BillSerializer
+from .serializers import (
+    CallRecordStartSerializer,
+    CallRecordEndSerializer,
+    BillSerializer,
+    CallRecordFallbackSerializer
+)
 from .filters import BillFilter
 
 
 class CallRecordViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    """
+    Create the start/end call record
+
+    This endpoint makes possible to create the pair of records of a call. The
+    pair of records is the start and end information of the call.
+    """
     queryset = CallRecord.objects.all()
 
     def get_serializer_class(self):
-        data = self.request.data
+        data = self.request.data if self.request else {}
 
         if data.get('type') == CallRecord.START_RECORD:
             return CallRecordStartSerializer
-        return CallRecordEndSerializer
+
+        elif data.get('type') == CallRecord.END_RECORD:
+            return CallRecordEndSerializer
+
+        return CallRecordFallbackSerializer
 
 
 class BillViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    List all bill items for a subscriber
+
+    At this endpoint it's possible to get the telephone bill information. The
+    information is composed by the list of all call records filtered by the
+    specified period.
+    """
     serializer_class = BillSerializer
     filter_class = BillFilter
 

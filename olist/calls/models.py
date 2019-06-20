@@ -12,11 +12,19 @@ class CallRecord(models.Model):
         (END_RECORD, 'End record')
     )
 
-    type = models.IntegerField(choices=TYPES)
-    timestamp = models.DateTimeField()
-    call_id = models.CharField(max_length=256)
-    source = models.CharField(max_length=11, blank=True)
-    destination = models.CharField(max_length=11, blank=True)
+    type = models.IntegerField(choices=TYPES, help_text='Indicate if it\'s a call "start" or "end" record')
+    timestamp = models.DateTimeField(help_text='The timestamp of when the event occured')
+    call_id = models.CharField(max_length=256, help_text='Unique id for each call record pair')
+    source = models.CharField(
+        max_length=11,
+        blank=True,
+        help_text='The subscriber phone number that originated the call (required on start record)'
+    )
+    destination = models.CharField(
+        max_length=11,
+        blank=True,
+        help_text='The phone number receiving the call (required on start record)'
+    )
 
     class Meta:
         unique_together = ('type', 'call_id')
@@ -27,9 +35,23 @@ class Bill(models.Model):
     CALL_CHARGE = Decimal('0.09')
     REDUCED_HOURS = (pendulum.time(22), pendulum.time(6))
 
-    start_record = models.ForeignKey(CallRecord, related_name='start_record_bill', on_delete=models.CASCADE)
-    end_record = models.ForeignKey(CallRecord, related_name='end_record_bill', on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    start_record = models.ForeignKey(
+        CallRecord,
+        related_name='start_record_bill',
+        on_delete=models.CASCADE,
+        help_text='The start record of the pair'
+    )
+    end_record = models.ForeignKey(
+        CallRecord,
+        related_name='end_record_bill',
+        on_delete=models.CASCADE,
+        help_text='The end record of the pair'
+    )
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        help_text='The bill price'
+    )
 
     @property
     def start_date(self):

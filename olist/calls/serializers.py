@@ -3,19 +3,35 @@ from rest_framework import serializers
 from .models import CallRecord, Bill
 
 
+class CallRecordFallbackSerializer(serializers.ModelSerializer):
+    """Fallback when we can't recognize the record type"""
+
+    class Meta:
+        model = CallRecord
+        fields = '__all__'
+
+
 class CallRecordStartSerializer(serializers.ModelSerializer):
-    source = serializers.CharField(min_length=10, max_length=11, allow_blank=False)
-    destination = serializers.CharField(min_length=10, max_length=11, allow_blank=False)
+    source = serializers.CharField(
+        min_length=10,
+        max_length=11,
+        allow_blank=False,
+        help_text='The subscriber phone number that originated the call (required on start record)'
+    )
+    destination = serializers.CharField(
+        min_length=10,
+        max_length=11,
+        allow_blank=False,
+        help_text='The phone number receiving the call (required on start record)'
+    )
 
     def validate_source(self, data):
-        # TODO validate area code and starts digits
         if not data.isdigit():
             raise serializers.ValidationError('Ensure this field is a phone number with area code.')
 
         return data
 
     def validate_destination(self, data):
-        # TODO validate area code and starts digits
         if not data.isdigit():
             raise serializers.ValidationError('Ensure this field is a phone number with area code.')
 
@@ -74,9 +90,9 @@ class CallRecordEndSerializer(serializers.ModelSerializer):
 
 
 class BillSerializer(serializers.ModelSerializer):
-    start_date = serializers.DateField(read_only=True)
-    start_time = serializers.TimeField(read_only=True)
-    duration = serializers.DurationField(read_only=True)
+    start_date = serializers.DateField(read_only=True, help_text='The call start date')
+    start_time = serializers.TimeField(read_only=True, help_text='The call start time')
+    duration = serializers.DurationField(read_only=True, help_text='The call duration')
 
     class Meta:
         model = Bill

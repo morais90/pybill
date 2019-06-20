@@ -1,6 +1,8 @@
 # build stage
 FROM python:3-alpine as builder
 
+ENV PYTHONUNBUFFERED=1
+
 RUN mkdir /install \
 && apk add --no-cache \
   gcc \
