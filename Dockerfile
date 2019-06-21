@@ -11,7 +11,8 @@ RUN mkdir /install \
   zlib-dev \
   jpeg-dev \
   libxml2-dev \
-  libxslt-dev
+  libxslt-dev \
+  curl
 
 ADD . /code
 WORKDIR /code
