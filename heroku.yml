@@ -12,7 +12,7 @@ build:
 release:
   image: web
   command:
-    - python manage.py migrate
+    - ./release.sh
 
 run:
   web: gunicorn olist.core.wsgi --bind=0.0.0.0:$PORT --workers=4
