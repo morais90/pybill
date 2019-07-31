@@ -3,6 +3,36 @@
 [![CircleCI](https://circleci.com/gh/morais90/pybill/tree/master.svg?style=svg)](https://circleci.com/gh/morais90/pybill/tree/master)
 PyBill is an application that helps in tracking the calls that your company makes. Through it, it's possible to monitor and audit in real time all the data necessary for good management. The relevant data reports allow you to take care of your business in a much simpler way.
 
+## Set up the Docker environment
+
+### Installing dependencies
+- Install [docker-compose](https://docs.docker.com/compose/install)
+
+### Initialize the containers
+```
+shell
+# docker-compose up
+```
+At this time the aplication will be available in http://127.0.0.1:8000
+
+### Apply initial migrations
+```
+shell
+# docker-compose exec pybill python manage.py migrate
+```
+
+### Run tests
+```
+shell
+# docker-compose exec pybill python manage.py test --verbosity 2 --noinput --settings pybill.core.settings_test tests
+```
+
+### Run linter
+```
+shell
+# docker-compose exec pybill pycodestyle pybill/
+```
+
 ### API Documentation
 
 The API documentation access is allowed through the URL `/docs/` path. The documentation explain the available methods and the parameters for each context.
