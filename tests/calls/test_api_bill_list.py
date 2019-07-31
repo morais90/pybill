@@ -4,7 +4,7 @@ from unittest.mock import patch
 from rest_framework.test import APITransactionTestCase
 from rest_framework import status
 
-from olist.calls.models import CallRecord
+from pybill.calls.models import CallRecord
 
 
 class BillListTestCase(APITransactionTestCase):

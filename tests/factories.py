@@ -2,7 +2,7 @@
 import factory
 import pendulum
 
-from olist.calls.models import CallRecord
+from pybill.calls.models import CallRecord
 
 
 class CallRecordStartFactory(factory.django.DjangoModelFactory):

@@ -33,4 +33,4 @@ FROM builder as production
 
 RUN pip install --no-cache-dir --requirement requirements/production.txt
 
-CMD ["gunicorn", "olist.core.wsgi", "--bind=0.0.0.0:80", "--workers=4"]
+CMD ["gunicorn", "pybill.core.wsgi", "--bind=0.0.0.0:80", "--workers=4"]

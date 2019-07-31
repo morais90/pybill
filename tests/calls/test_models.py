@@ -4,7 +4,7 @@ from decimal import Decimal
 import pendulum
 from django.test import TransactionTestCase
 
-from olist.calls.models import Bill
+from pybill.calls.models import Bill
 from tests.factories import CallRecordStartFactory, CallRecordEndFactory
 
 

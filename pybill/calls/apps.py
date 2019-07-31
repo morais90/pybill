@@ -2,7 +2,7 @@ from django.apps import AppConfig
 
 
 class CallsConfig(AppConfig):
-    name = 'olist.calls'
+    name = 'pybill.calls'
 
     def ready(self):
-        import olist.calls.signals  # noqa
+        import pybill.calls.signals  # noqa

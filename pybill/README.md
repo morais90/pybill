@@ -1,8 +1,7 @@
-## Olist Calls
+## PyBill
 
-[![CircleCI](https://circleci.com/gh/morais90/work-at-olist/tree/master.svg?style=svg)](https://circleci.com/gh/morais90/work-at-olist/tree/master)
-
-Olist Calls is an application that helps in tracking the calls that your company makes. Through it, it's possible to monitor and audit in real time all the data necessary for good management. The relevant data reports allow you to take care of your business in a much simpler way.
+[![CircleCI](https://circleci.com/gh/morais90/pybill/tree/master.svg?style=svg)](https://circleci.com/gh/morais90/pybill/tree/master)
+PyBill is an application that helps in tracking the calls that your company makes. Through it, it's possible to monitor and audit in real time all the data necessary for good management. The relevant data reports allow you to take care of your business in a much simpler way.
 
 ### API Documentation
 

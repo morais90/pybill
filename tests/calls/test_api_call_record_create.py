@@ -3,7 +3,7 @@ from django.utils import dateparse
 from rest_framework.test import APITransactionTestCase
 from rest_framework import status
 
-from olist.calls.models import CallRecord
+from pybill.calls.models import CallRecord
 from tests.factories import CallRecordStartFactory, CallRecordEndFactory
 
 

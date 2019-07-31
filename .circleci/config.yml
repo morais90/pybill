@@ -16,12 +16,12 @@ jobs:
     docker:
       - image: circleci/python:3.7
         environment:
-          DATABASE_URL: postgresql://olist@localhost/olist
+          DATABASE_URL: postgresql://pybill@localhost/pybill
 
       - image: circleci/postgres:alpine
         environment:
-          POSTGRES_USER: olist
-          POSTGRES_DB: olist
+          POSTGRES_USER: pybill
+          POSTGRES_DB: pybill
 
     steps:
       - checkout
@@ -49,13 +49,13 @@ jobs:
           name: Linter
           command: |
             . venv/bin/activate
-            pycodestyle olist/
+            pycodestyle pybill/
 
       - run:
           name: Unit tests
           command: |
             . venv/bin/activate
-            python manage.py test --verbosity 2 --noinput --settings olist.core.settings_test tests
+            python manage.py test --verbosity 2 --noinput --settings pybill.core.settings_test tests
 
   deploy:
     docker:
