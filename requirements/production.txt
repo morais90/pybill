@@ -6,7 +6,7 @@ psycopg2==2.8.2
 pendulum==2.0.4
 
 coreapi==2.3.3
-Pygments==2.4.2
+Pygments==2.7.4
 Markdown==3.1.1
 
 # Deploy requirement
