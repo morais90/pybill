@@ -4,7 +4,7 @@ FROM python:3-alpine as builder
 ENV PYTHONUNBUFFERED=1
 
 RUN mkdir /install \
-&& apk add --no-cache \
+  && apk add --no-cache \
   gcc \
   musl-dev \
   postgresql-dev \
@@ -12,6 +12,9 @@ RUN mkdir /install \
   jpeg-dev \
   libxml2-dev \
   libxslt-dev \
+  libffi-dev \
+  openssl-dev \
+  cargo \
   curl
 
 ADD . /code
@@ -23,7 +26,7 @@ RUN pip install --upgrade pip
 FROM builder as development
 
 RUN apk add --no-cache postgresql-client \
-&& pip install --no-cache-dir --requirement requirements/development.txt
+  && pip install --no-cache-dir --requirement requirements/development.txt
 
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0:8000"]
