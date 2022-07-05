@@ -1,4 +1,4 @@
-django==2.2.24
+django==4.0.6
 djangorestframework==3.9.4
 django-filter==2.4.0
 django-environ==0.4.5
